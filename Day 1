@@ -1,0 +1,36 @@
+1.Get users whose age > 25 and city = 'Mumbai'
+
+SELECT * FROM users
+WHERE age > 25 AND city = 'Mumbai';
+
+
+2.Failed transactions sorted by amount DESC
+
+SELECT * FROM transactions
+WHERE status = 'FAILED'
+ORDER BY amount DESC;
+
+
+3.Name starts with S and ends with h
+
+SELECT * FROM users
+WHERE name LIKE 'S%h';
+
+
+4.Users where age is NOT NULL
+
+SELECT * FROM users
+WHERE age IS NOT NULL;
+
+Wrong:
+SELECT * FROM users WHERE age = NULL;
+
+This will NOT work
+
+Correct:
+SELECT * FROM users WHERE age IS NULL;
+Why?
+
+In SQL:
+NULL means unknown value
+You cannot compare unknown using =
