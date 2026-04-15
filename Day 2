@@ -1,0 +1,57 @@
+Q1: Total amount per user
+
+SELECT user_id, SUM(amount) AS total_amount
+FROM transactions
+GROUP BY user_id;
+
+Q2: Users whose total transaction amount > 1000
+
+SELECT user_id, SUM(amount) AS total_amount
+FROM transactions
+GROUP BY user_id
+HAVING total_amount > 1000;
+
+Q3: Number of SUCCESS transactions per user
+
+SELECT user_id, COUNT(*) AS success_count
+FROM transactions
+WHERE status = 'SUCCESS'
+GROUP BY user_id;
+
+Q4: Users with more than 2 transactions
+
+SELECT user_id, COUNT(*) AS txn_count
+FROM transactions
+GROUP BY user_id
+HAVING txn_count > 2;
+
+#Wrong Query
+
+SELECT user_id, COUNT(*)
+FROM transactions
+WHERE COUNT(*) > 2
+GROUP BY user_id;
+
+#Why this fails?
+
+-WHERE runs before grouping
+- But COUNT(*) is calculated after grouping
+
+## Why can't we use aggregate functions in WHERE?
+Because:
+WHERE executes before GROUP BY
+Aggregate functions (SUM, COUNT) are calculated after GROUP BY
+
+So they don’t exist yet during WHERE.
+
+Why HAVING exists? HAVING is used to:
+-Filter grouped data
+-Work with aggregate functions
+
+## Simple Way to Remember
+WHERE → row-level filtering
+HAVING → group-level filtering
+
+
+
+
