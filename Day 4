@@ -1,0 +1,44 @@
+1.Get employee name + manager name
+
+SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m
+ON e.manager_id = m.emp_id;
+
+2.Get user name,wallet balance,total transaction amount
+
+SELECT u.name, w.balance, SUM(t.amount) AS total_amount
+FROM users u
+LEFT JOIN wallets w ON u.user_id = w.user_id
+LEFT JOIN transactions t ON u.user_id = t.user_id
+GROUP BY u.name, w.balance;
+
+3.Users with both SUCCESS and FAILED
+
+SELECT user_id
+FROM transactions
+GROUP BY user_id
+HAVING 
+    SUM(CASE WHEN status = 'SUCCESS' THEN 1 ELSE 0 END) > 0
+    AND
+    SUM(CASE WHEN status = 'FAILED' THEN 1 ELSE 0 END) > 0;
+
+
+4.Users with transactions in >1 city
+
+SELECT user_id
+FROM transactions
+GROUP BY user_id
+HAVING COUNT(DISTINCT city) > 1;
+
+5.Why JOIN creates duplicates?
+
+Because:
+One row in table A can match multiple rows in table B
+Example:
+
+1 user → 5 transactions
+JOIN result = 5 rows
+This is called one-to-many relationship explosion
+
+
