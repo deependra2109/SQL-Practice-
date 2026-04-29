@@ -1,0 +1,36 @@
+Q.What constraint prevents duplicate values?
+Answer: UNIQUE constraint
+Also:PRIMARY KEY also prevents duplicates (and NULL)
+
+Q.Which index is better?
+
+Query:WHERE status = 'SUCCESS' AND user_id = 101
+
+Correct Answer:(user_id, status)
+Why?
+
+Index works left → right
+First filter by user_id (high selectivity)
+Then by status
+
+If you use: (status, user_id)
+
+Less efficient because status has fewer unique 
+values
+
+Q.When should you NOT use index?
+
+Avoid index when:
+
+Table is small
+Column has low uniqueness (e.g., gender)
+Too many INSERT/UPDATE operations
+Column frequently updated
+
+Q.Why too many indexes are bad?
+
+Because:
+
+Slow INSERT/UPDATE (index needs update)
+More storage used
+Query planner confusion
