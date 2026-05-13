@@ -1,0 +1,62 @@
+Q.Why normalization?
+Answer: 
+Reduce
+redundancy
+inconsistency
+update anomalies
+
+Q.Does normalization improve performance?
+
+answer:
+Better consistency 
+Too many joins can slow reads
+
+Q.Why companies denormalize?
+
+Answer:Faster reads in large-scale systems
+
+Example: analytics,dashboards
+
+Q.Is “more normalization always better?”
+
+Answer:NO
+Too much normalization:
+
+many joins
+complex queries
+slower reads
+
+Q.Difference: 2NF vs 3NF
+
+Answer:
+2NF Removes partial dependency
+
+Meaning:
+Column should depend on FULL primary key
+
+3NF Removes transitive dependency
+
+Meaning: Non-key columns should depend only on the PRIMARY KEY.
+
+Q.Which is better?
+
+A. Highly normalized DB
+B. Denormalized DB
+
+Answer: Depends on:
+
+Read-heavy vs write-heavy system
+Performance needs
+Data consistency requirements
+
+Normalized DB Better for:
+
+consistency
+transactional systems
+
+Denormalized DB Better for:
+
+analytics
+dashboards
+faster reads
+banking/payment systems
